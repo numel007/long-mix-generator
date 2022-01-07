@@ -10,8 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
 // Routes
-const spotifyAuth = require("./routes/spotifyAuth");
-app.use("/", spotifyAuth);
+// const spotifyAuth = require("./scripts/spotifyAuth");
+// app.use("/", spotifyAuth);
 
 // Server start
 app.listen(PORT, () => {

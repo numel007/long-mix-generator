@@ -15,12 +15,14 @@ exports.getAccessToken = () => {
 		json: true,
 	};
 
-	request.post(authOptions, function (error, response, body) {
-		if (!error && response.statusCode === 200) {
-			var token = body.access_token;
-			return token;
-		} else {
-			console.log("Something broke...");
-		}
+	return new Promise((resolve, reject) => {
+		request.post(authOptions, function (error, response, body) {
+			if (!error && response.statusCode === 200) {
+				var token = body.access_token;
+				resolve(token);
+			} else {
+				reject({ err: "Failed to retrieve access token" });
+			}
+		});
 	});
 };

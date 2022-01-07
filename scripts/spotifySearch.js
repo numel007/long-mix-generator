@@ -1,7 +1,6 @@
 const request = require("request");
 
-// Remember to export
-getSongNames = (accessToken, genre) => {
+exports.getSongNames = (accessToken, genre) => {
 	var options = {
 		method: "GET",
 		url: `https://api.spotify.com/v1/recommendations?limit=5&seed_genres=${genre}`,
@@ -25,10 +24,3 @@ getSongNames = (accessToken, genre) => {
 		});
 	});
 };
-
-getSongNames(
-	"BQCyIi9h2NFsM-KZ-L4a9rKcYgy30p2YN9aG-ynpM_KaPJvu55UjBZB5GM3z6uzRo-ghg5rz9B9UcxxfhDg",
-	"ambient"
-).then((res) => {
-	console.log(res);
-});

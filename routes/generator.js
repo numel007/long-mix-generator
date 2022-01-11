@@ -12,16 +12,13 @@ router.get("/generate", (req, res) => {
 router.post("/generate", (req, res) => {
 	getAccessToken()
 		.then((token) => {
-			console.log(`Token: ${token}`);
-
 			// TODO: Remove hardcoded ambient genre
-			getSongNames(token, "ambient")
-				.then((names) => {
-					console.log(`Spotify names: ${names}`);
-					return searchYoutube(names);
-				})
-				.then((urls) => console.log(urls));
+			return getSongNames(token, "ambient");
 		})
+		.then((names) => {
+			return searchYoutube(names);
+		})
+		.then((urls) => console.log(urls))
 		.catch((err) => console.log(err));
 });
 

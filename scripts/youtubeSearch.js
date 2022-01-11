@@ -1,6 +1,6 @@
 const youtubeSearchApi = require("youtube-search-api");
 
-let searchYoutube = (keywordsArray) => {
+exports.searchYoutube = (keywordsArray) => {
 	return new Promise((resolve, reject) => {
 		let urls = [];
 		let promises = [];
@@ -23,10 +23,3 @@ let searchYoutube = (keywordsArray) => {
 		});
 	});
 };
-
-searchYoutube([
-	"BEcause - Dreamcatcher",
-	"Bossfight - Flirt Flirt Oh It Hurts",
-	"Jay Wolf - Telepathy",
-	"Overwerk - Daybreak",
-]).then((res) => console.log(res));

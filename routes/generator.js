@@ -3,6 +3,8 @@ const router = express.Router();
 const { getAccessToken } = require("../scripts/spotifyAuth");
 const { getSongNames } = require("../scripts/spotifySearch");
 const { searchYoutube } = require("../scripts/youtubeSearch");
+const { youtubeDownload } = require("../scripts/youtubeDownload");
+const { spliceAudio } = require("../scripts/spliceAudio");
 
 router.get("/generate", (req, res) => {
 	return res.json({ message: "Hello from /generate" });
@@ -18,7 +20,15 @@ router.post("/generate", (req, res) => {
 		.then((names) => {
 			return searchYoutube(names);
 		})
-		.then((urls) => console.log(urls))
+		.then((urls) => {
+			return youtubeDownload(urls);
+		})
+		.then(() => {
+			return spliceAudio();
+		})
+		.then(() => {
+			res.json({ msg: "Retrieve audio file now." });
+		})
 		.catch((err) => console.log(err));
 });
 

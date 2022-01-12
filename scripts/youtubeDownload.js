@@ -1,6 +1,6 @@
 const { spawn } = require("child_process");
 
-const youtubeDownload = (urls) => {
+exports.youtubeDownload = (urls) => {
 	return new Promise((resolve, reject) => {
 		promises = [];
 		for (let i in urls) {
@@ -20,11 +20,3 @@ const youtubeDownload = (urls) => {
 		});
 	});
 };
-
-youtubeDownload([
-	"www.youtube.com/watch?v=ygzNypLvBjA",
-	"www.youtube.com/watch?v=xduIjhAhVek",
-	"www.youtube.com/watch?v=Bc0VofBKva0",
-	"www.youtube.com/watch?v=gOZkoalCoHc",
-	"www.youtube.com/watch?v=0pCoAA8JNYI",
-]).then(() => console.log("done"));

@@ -1,23 +1,25 @@
 const ffmpeg = require("fluent-ffmpeg");
 const fs = require("fs");
 
-const spliceAudio = () => {
+exports.spliceAudio = () => {
 	return new Promise((resolve, reject) => {
 		// Get list of video files
+		console.log(`${__dirname}/audio`);
 		fs.readdir(`${__dirname}/audio`, (err, files) => {
 			if (err) {
 				reject({ err: "Unable to get list of downloaded videos" });
 			}
+
 			promises = [];
 			filenames = [];
 			files.forEach((file) => {
 				promises.push(
 					new Promise((resolve, reject) => {
 						// Convert video file to mp3
-						ffmpeg(`./audio/${file}`)
+						ffmpeg(`${__dirname}/audio/${file}`)
 							.audioFilters("silenceremove=stop_periods=2")
 							.format("mp3")
-							.save(`./audio/${file.slice(0, -4)}.mp3`)
+							.save(`${__dirname}/audio/${file.slice(0, -4)}.mp3`)
 							.on("err", (err) => console.log(`Error converting ${file}`))
 							.on("start", () => console.log(`Converting ${file}`))
 							.on("end", () => {
@@ -66,5 +68,3 @@ const spliceAudio = () => {
 		});
 	});
 };
-
-spliceAudio().then((res) => console.log(res));

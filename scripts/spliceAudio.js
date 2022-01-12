@@ -13,6 +13,7 @@ const spliceAudio = () => {
 					promises.push(
 						new Promise((resolve, reject) => {
 							ffmpeg(`./audio/${file}`)
+								.audioFilters("silenceremove=stop_periods=2")
 								.format("mp3")
 								.save(`./audio/${file.slice(0, -4)}.mp3`)
 								.on("err", () => console.log(`Error converting ${file}`))
@@ -25,8 +26,10 @@ const spliceAudio = () => {
 					);
 				});
 
-				// Conversions completed
-				Promise.allSettled(promises).then(() => resolve(console.log("All conversions finished.")));
+				Promise.allSettled(promises).then(() => {
+					console.log("Conversions completed");
+					// Begin splicing audio together
+				});
 			}
 		});
 	});

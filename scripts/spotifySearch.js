@@ -1,10 +1,9 @@
 const request = require("request");
 
 exports.getSongNames = (accessToken, genre) => {
-	console.log(accessToken);
 	var options = {
 		method: "GET",
-		url: `https://api.spotify.com/v1/recommendations?limit=5&seed_genres=${genre}`,
+		url: `https://api.spotify.com/v1/recommendations?limit=5&seed_genres=${genre.genre}`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 		},
@@ -22,6 +21,7 @@ exports.getSongNames = (accessToken, genre) => {
 			for (let track in tracks) {
 				names.push(`${tracks[track]["name"]} - ${tracks[track]["artists"][0]["name"]}`);
 			}
+			console.log(names);
 			resolve({ names: names });
 		});
 	});

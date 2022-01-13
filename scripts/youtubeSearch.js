@@ -5,11 +5,11 @@ exports.searchYoutube = (keywordsArray) => {
 		let urls = [];
 		let promises = [];
 
-		for (let i in keywordsArray) {
+		for (let i in keywordsArray["names"]) {
 			promises.push(
 				new Promise((resolve, reject) => {
 					youtubeSearchApi
-						.GetListByKeyword(keywordsArray[i], false, 1)
+						.GetListByKeyword(keywordsArray["names"][i], false, 1)
 						.then((res) => {
 							resolve(urls.push(`www.youtube.com/watch?v=${res["items"][0]["id"]}`));
 						})

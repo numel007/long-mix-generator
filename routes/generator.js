@@ -24,8 +24,7 @@ router.post("/generate", (req, res) => {
 
 	getAccessToken()
 		.then((token) => {
-			// TODO: Remove hardcoded ambient genre
-			return getSongNames(token, "ambient");
+			return getSongNames(token, req.query);
 		})
 		.then((names) => {
 			return searchYoutube(names);
@@ -37,9 +36,9 @@ router.post("/generate", (req, res) => {
 			return spliceAudio();
 		})
 		.then(() => {
-			res.json({ msg: "Retrieve audio file now." });
+			res.json({ msg: "Audio file ready." });
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => res.json({ error: err }));
 });
 
 module.exports = router;

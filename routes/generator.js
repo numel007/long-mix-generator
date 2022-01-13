@@ -6,6 +6,7 @@ const { searchYoutube } = require("../scripts/youtubeSearch");
 const { youtubeDownload } = require("../scripts/youtubeDownload");
 const { spliceAudio } = require("../scripts/spliceAudio");
 const fs = require("fs");
+var path = require("path");
 
 router.get("/generate", (req, res) => {
 	return res.json({ message: "Hello from /generate" });
@@ -36,7 +37,8 @@ router.post("/generate", (req, res) => {
 			return spliceAudio();
 		})
 		.then(() => {
-			res.json({ msg: "Audio file ready." });
+			console.log("Sending file");
+			res.sendFile(path.resolve(`${__dirname}/../scripts/output/mergedAudio.mp3`));
 		})
 		.catch((err) => res.json({ error: err }));
 });

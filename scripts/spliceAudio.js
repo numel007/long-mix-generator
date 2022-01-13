@@ -4,7 +4,6 @@ const fs = require("fs");
 exports.spliceAudio = () => {
 	return new Promise((resolve, reject) => {
 		// Get list of video files
-		console.log(`${__dirname}/audio`);
 		fs.readdir(`${__dirname}/audio`, (err, files) => {
 			if (err) {
 				reject({ err: "Unable to get list of downloaded videos" });

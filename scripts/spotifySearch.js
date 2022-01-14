@@ -3,7 +3,7 @@ const request = require("request");
 exports.getSongNames = (accessToken, genre) => {
 	var options = {
 		method: "GET",
-		url: `https://api.spotify.com/v1/recommendations?limit=1&seed_genres=${genre.genre}`,
+		url: `https://api.spotify.com/v1/recommendations?limit=5&seed_genres=${genre.genre}`,
 		headers: {
 			Authorization: `Bearer ${accessToken}`,
 		},
